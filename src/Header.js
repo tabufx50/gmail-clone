@@ -1,9 +1,11 @@
 import React from 'react';
 import "./Header.css";
 import MenuIcon from '@material-ui/icons/Menu';
-import { IconButton } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import AppsIcon from '@mui/icons-material/Apps';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 function Header() {
     return ( 
@@ -20,6 +22,13 @@ function Header() {
                 <ArrowDropDownIcon className="header__inputCaret" />
             </div>
             <div className="header__right">
+            <IconButton>
+                <AppsIcon />
+            </IconButton>
+            <IconButton>
+                <NotificationsIcon />
+            </IconButton>
+            <Avatar />
 
             </div>
         </div>
