@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
   Route,
   Link
@@ -13,22 +13,22 @@ import EmailList from './EmailList';
 
 function App() {
   return (
-    <Router>
+    
     <div className="app">
     <Header />
-
+    
     <div className='app__body'>
       <Sidebar />
 
       <Routes>
-        <Route path="/mail" component={<Mail/>}
-         />
-          <Route path="/" component={<EmailList />}
-          />
+          <Route path='/' element={<EmailList />} />
+        <Route path='/mail' exact element={<Mail />} />
       </Routes>
+     
     </div>
     </div>
-    </Router>
+    
+    
   );
 }
 
