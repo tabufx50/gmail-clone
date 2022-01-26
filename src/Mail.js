@@ -10,19 +10,22 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useNavigate } from 'react-router-dom';
+import { useHistory, useNavigate } from 'react-router-dom';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import PrintIcon from '@mui/icons-material/Print';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useSelector } from 'react-redux';
+import { selectOpenMail } from './features/mailSlice';
 
 function Mail() {
-
-  const navigate = useNavigate();
+  const history = useHistory();
+  // const navigate = useNavigate();
+  const selectedMail = useSelector(selectOpenMail);
 
   return <div className='mail'>
       <div className="mail__tools">
         <div className="mail__toolsLeft">
-        <IconButton onClick={() => navigate("/")}>
+        <IconButton onClick={() => history.push("/")}>
           <ArrowBackIcon />
         </IconButton>
         
@@ -76,14 +79,14 @@ function Mail() {
       </div>
       <div className="mail__body">
         <div className="mail__bodyHeader">
-          <h2>Subject</h2>
+          <h2>{selectedMail?.subject}</h2>
           <LabelImportantIcon className='mail__important' />
-          <p>Title</p>
-          <p className='mail__time'>10pm</p>
+          <p>{selectedMail?.title}</p>
+          <p className='mail__time'>{selectedMail?.time}</p>
         </div>
 
         <div className="mail__message">
-          <p>This is a message</p>
+          <p>{selectedMail?.description}</p>
         </div>
       </div>
   </div>;

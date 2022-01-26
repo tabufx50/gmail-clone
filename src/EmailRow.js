@@ -3,14 +3,30 @@ import { Checkbox, IconButton } from '@material-ui/core';
 import './EmailRow.css'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { useNavigate } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { selectMail } from './features/mailSlice';
 
 
 function EmailRow({ id, title, subject, description, time}) {
+    const history = useHistory();
 
-const navigate = useNavigate();
+// const navigate = useNavigate();
+const dispatch = useDispatch();
 
-  return <div onClick={() => navigate("/mail")} className='emailRow'>
+const openMail = () => {
+    dispatch(selectMail({
+        id, title, subject, description, time,
+    })
+    );
+    history.push("/mail")
+};
+
+
+// return <div onClick={() => navigate("/mail")} className='emailRow'></div>
+// return <div onClick={() => history.push('/mail')} 
+
+  return <div onClick={openMail} className='emailRow'>
     <div className="emailRow__options">
         <Checkbox />
         <IconButton>

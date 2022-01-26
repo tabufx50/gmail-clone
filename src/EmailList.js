@@ -1,6 +1,6 @@
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import { Checkbox, IconButton } from '@mui/material';
-import React from 'react';
+import {React, useEffect, useState} from 'react';
 import './EmailList.css'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -13,8 +13,18 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import PeopleIcon from '@mui/icons-material/People';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import EmailRow from './EmailRow';
+import { db } from './firebase';
 
 function EmailList() {
+    const [ emails, setEmails] = useState([]);
+
+    useEffect(() => {
+        db.collection('emails').orderBy('timestamp', 'desc').onSnapshot(snapshot => setEmails(snapshot.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data(),
+        }))))
+    }, [])
+
   return <div className='emailList'>
       <div className='emailList__settings'>
           <div className='emailList__settingsLeft'>
@@ -52,10 +62,92 @@ function EmailList() {
       </div>
 
       <div className="emailList__list">
+        {emails.map(({id, data: {to, subject, message, timestamp}}) => (
+            <EmailRow
+            // id={id}
+            // key={key}
+            title={to}
+            subject={subject}
+            description={message}
+            time={new Date(timestamp?.seconds * 1000).toUTCString()}
+             />
+        ))}
           <EmailRow
             title="Twitch"
             subject="Hey fellow streamer!!!"
             description="This is a test"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
+            time="10pm"
+           />
+      </div>
+      <div className="emailList__list">
+          <EmailRow
+            title="Twitch"
+            subject="Hey fellow streamer!!!"
+            description="This is a test and don't thinks that this will expand out to the limit"
             time="10pm"
            />
       </div>
